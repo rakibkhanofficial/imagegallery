@@ -1,12 +1,69 @@
-import React from "react";
+import React, { useState } from "react";
+import { Image } from "antd";
+import { Data } from "../../../utils/data";
+import { Styled } from "./imagegallery.styled";
 
 const Imagegallery = () => {
+  const [images, setImages] = useState(Data);
+  const [selectedImages, setSelectedImages] = useState([]);
 
-    return(
-        <div>
-            <h1 className=" Text-3xl text-center text-black"> Image Gallery</h1>
+  const handleImageSelect = (index: any) => {
+    const updatedSelection = [...selectedImages];
+    if (updatedSelection.includes(index)) {
+      updatedSelection.splice(updatedSelection.indexOf(index), 1);
+    } else {
+      updatedSelection.push(index);
+    }
+    setSelectedImages(updatedSelection);
+  };
+
+  const handleDeleteImages = () => {
+    const updatedData = images.filter(
+      (_, index) => !selectedImages.includes(index)
+    );
+    setImages(updatedData);
+    setSelectedImages([]);
+  };
+
+  return (
+    <div>
+      <Styled.Title> Image Gallery</Styled.Title>
+      <div className="flex justify-between px-5 py-4">
+        <div>Selected Files: {selectedImages.length}</div>
+        <button
+          title="Delete files"
+          type="button"
+          className="text-red-500 py-4 px-5 rounded-lg border border-gray-600 hover:bg-red-700 hover:text-white"
+          onClick={handleDeleteImages}
+        >
+          Delete Files
+        </button>
+      </div>
+      <div className=" p-3 md:p-5 lg:p-10">
+        <div className=" grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-4">
+          {images.map((item, index) => (
+            <div key={index}>
+              <label>
+                <Image
+                  src={item.src}
+                  alt={item.name}
+                  width={200}
+                  height={200}
+                  sizes="100vw"
+                />
+                <input
+                  title="checkbox"
+                  type="checkbox"
+                  checked={selectedImages.includes(index)}
+                  onChange={() => handleImageSelect(index)}
+                />
+              </label>
+            </div>
+          ))}
         </div>
-    )
-}
+      </div>
+    </div>
+  );
+};
 
 export default Imagegallery;
