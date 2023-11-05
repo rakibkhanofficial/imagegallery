@@ -3,11 +3,16 @@ import { Image } from "antd";
 import { Data } from "../../../utils/data";
 import { Styled } from "./imagegallery.styled";
 
-const Imagegallery = () => {
-  const [images, setImages] = useState([]);
-  const [selectedImages, setSelectedImages] = useState([]);
+interface ImageData {
+  src: string;
+  name: string;
+}
 
-  const handleImageSelect = (index: any) => {
+const Imagegallery = () => {
+  const [images, setImages] = useState<ImageData[]>([]);
+  const [selectedImages, setSelectedImages] = useState<number[]>([]);
+
+  const handleImageSelect = (index: number) => {
     const updatedSelection = [...selectedImages];
     if (updatedSelection.includes(index)) {
       updatedSelection.splice(updatedSelection.indexOf(index), 1);
@@ -51,7 +56,7 @@ const Imagegallery = () => {
       </div>
       <div className=" p-3 md:p-5 lg:p-10">
         <div className=" grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-4">
-          {images.map((item, index) => (
+          {images.map((item: ImageData, index: number) => (
             <div key={index}>
               <label>
                 <Image
