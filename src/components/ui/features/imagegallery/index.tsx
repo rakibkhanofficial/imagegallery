@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Image } from "antd";
 import { Data } from "../../../utils/data";
 import { Styled } from "./imagegallery.styled";
 
 const Imagegallery = () => {
-  const [images, setImages] = useState(Data);
+  const [images, setImages] = useState([]);
   const [selectedImages, setSelectedImages] = useState([]);
 
   const handleImageSelect = (index: any) => {
@@ -24,6 +24,16 @@ const Imagegallery = () => {
     setImages(updatedData);
     setSelectedImages([]);
   };
+
+  useEffect(() => {
+    if (Data) {
+      setImages(Data);
+    }
+  }, []);
+
+  if (!Data) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div>
