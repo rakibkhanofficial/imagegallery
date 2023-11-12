@@ -22,8 +22,6 @@ You can start editing the page by modifying `pages/index.tsx`. The page auto-upd
 
 The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize.
-
 =
 ![image](https://github.com/rakibkhanofficial/imagegallery/assets/39366407/adef5fb5-2992-4645-90df-fb4d7c6810a7)
 
